@@ -1,5 +1,5 @@
 # Study-Effective-Java
-GDSC Study Effective Java 독서 스터디 저장소입니다.
+GDSC EWHA Effective Java 독서 스터디 레포지토리입니다.
 
 ### :books:  스터디 진행 서적
 - 교재: http://www.yes24.com/Product/Goods/65551284
