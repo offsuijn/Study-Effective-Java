@@ -25,7 +25,7 @@
 
 #### 5. 자신 외에는 내부의 가변 컴포넌트에 접근할 수 없도록 한다.
 
-### 예시: 불변 복소수 클래스
+#### 예시: 불변 복소수 클래스
 ```java
 public final class Complex {
     private final double re;
@@ -88,4 +88,46 @@ public final class Complex {
 ```
 - 실수부와 허수부 값을 반환하는 접근자 메서드가 정의되어 있고, 사칙연산을 위한 메서드들이 제공되고 있다.
 - 사칙연산 메서드들은 인스턴스 자신은 수정하지 않고 새로운 Complex 인스턴스를 만들어 반환한다.
-- 불변 객체는 **Thread-safe**하여 따로 동기화할 필요가 없다는 장점이 있다.
+- 피연산자에 함수를 적용해 그 결과를 반환하지만, 피연산자 자체는 그대로이다.(함수형 프로그래밍)
+   - 해당 메서드가 객체의 값을 변경하지 않는다.
+
+### 불변 객체의 장점
+- 생성된 시점의 상태를 파괴될 때까지 그대로 간직한다.
+- Thread-safe하여 따로 동기화할 필요가 없다.
+- 안심하고 공유할 수 있다.
+
+### 불변 객체의 단점
+값이 다르면 반드시 독립된 객체로 만들어야 한다.
+- 값의 가짓수가 많다면 이들을 모두 만드는 데 큰 비용이 들게 된다.
+
+### 불변 클래스를 만드는 또 다른 설계 방법
+-> 모든 생성자를 private 혹은 package-private으로 만들고 public 정적 팩토리를 제공한다.
+
+```java
+public class Complex {
+    private final double re;
+    private final double im;
+    
+    private Complex(double re, double im) {
+        this.re = re;
+        this.im = im;
+    }
+    
+    public static Complex valueOf(double re, double im) {
+        return new Complex(re, im);
+    }
+    
+    //나머지 코드 생략
+}
+```
+- final 클래스를 없애고, 생성자를 private으로 바꾼 뒤 정적 팩토리 메서드를 통해 불변 객체를 제공하고 있다.
+- 패키지 바깥의 클라이언트에서 바라본 이 불변 객체는 사실상 final 클래스와 이다.
+   - public이나 protected 생성자가 없으니 다른 패키지에서 이 클래스를 확장할 방법이 없기 때문이다.
+
+
+## 정리
+- 클래스는 꼭 필요한 경우가 아니라면 불변이어야 한다.
+
+- 불변으로 만들 수 없는 클래스라도 변경할 수 있는 부분을 최소한으로 줄이자.
+
+- **다른 합당한 이유가 없다면 모든 필드는 private final이어야 한다.**
