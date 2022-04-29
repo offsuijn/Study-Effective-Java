@@ -117,23 +117,7 @@ public class ForwardingSet<E> implements Set<E> {
     @Override
     public boolean removeAll(Collection<?> c) { return s.removeAll(c); }
 
-    @Override
-    public boolean retainAll(Collection<?> c) { return s.retainAll(c); }
-
-    @Override
-    public Object[] toArray() { return s.toArray(); }
-
-    @Override
-    public <T> T[] toArray(T[] a) { return s.toArray(a); }
-
-    @Override
-    public int hashCode() { return s.hashCode(); }
-
-    @Override
-    public boolean equals(Object obj) { return s.equals(obj); }
-
-    @Override
-    public String toString() { return s.toString(); }
+    // 나머지 코드는 생략
 }
 ```
 - Set 인터페이스를 구현했고, Set의 인스턴스를 인수로 받는 생성자를 하나 제공한다.
