@@ -29,12 +29,13 @@ public class InstrumentedHashSet<E> extends HashSet<E> {
         return super.addAll(c);
     }
 
+    //접근자 메소드
     public int getAddCount() {
         return addCount;
     }
 }
 ```
-- HashSet을 상속하고, 추가된 원소의 수를 카운트하는 클래스로 확장한다.
+- HashSet을 상속하고, 처음 생성된 이후 원소 몇 개가 더해졌는지 알 수 있는 기능을 추가했다.
 - addAll()을 호출할 시 오동작한다.
    - HashSet의 addAll() 메서드가 add() 메서드를 사용하여 구현되기 때문이다.
 
