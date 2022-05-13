@@ -1,6 +1,8 @@
 ## 아이템 27. 비검사 경고를 제거하라
 제네릭을 사용하기 시작하면 수많은 컴파일러 경고들을 마주치게 된다.
-
+#### 비검사 경고
+- `warning : [unchecked]`
+- casting을 할 때 검사를 하지 않았다고 뜨는 경고이다.
 ### 할 수 있는 한 모든 비검사 경고를 제거하라.
 대부분의 비검사 경고는 쉽게 제거할 수 있다.
 #### 예시: 컴파일러 오류가 난다.
@@ -27,11 +29,11 @@ Venery.java:4: warning: [unchecked] unchecked conversion
 ```java
 public <T> T[] toArray(T[] a) {
    if (a.length < size) {
-      // 수정 전
+      // 수정 전 : 형변환 오류가 발생한다.
       return (T[]) Arrays.copyOf(elements, size, a.getClass());
       
       // 수정 후
-      // 생성한 배열과 매개변수로 받은 배열의 타입이 모두 T[]로 같으므로 올바른 형변환입니다 
+      // 생성한 배열과 매개변수로 받은 배열의 타입이 모두 T[]로 같으므로 올바른 형변환이다.
       @SuppressWarnings("unchecked") T[] result = 
          (T[]) Arrays.copyOf(elements, size, a.getClass());
       return result; 
